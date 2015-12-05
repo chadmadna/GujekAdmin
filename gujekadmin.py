@@ -15,15 +15,18 @@ class GujekAdmin:
         except psycopg2.Error as e:
             self.conn.rollback()
             print('Transaction failed: {}'.format(e))
-        ret = self.cur.fetchall()
-        return ret if ret else None
+        try:
+            ret = self.cur.fetchall()
+        except:
+            ret = None
+        return ret
             
     def show_table(self, tablename):
         """ This method will show a table in the database
             tablename = The table name """
         try:
             return self.query("SELECT * FROM {};".format(tablename))
-        except psycopg2.ProgrammingError as e:
+        except psycopg2.Error as e:
             print(e)
             
     def print_table(self, tablename):
@@ -43,9 +46,9 @@ class GujekAdmin:
 
     def search(self, tablename, searchby, value):
         """ This method will search the database for the given value and return its value
-            tablename = The table name
-            searchby =
-            value = The search key """
+            tablename (str) = The table name
+            searchby (str) = The column name
+            value (str) = The search key """
         try:
             if type(value) == int:
                 ret = self.query("SELECT * FROM {} WHERE {}={};".format(tablename, searchby, value))
@@ -57,13 +60,14 @@ class GujekAdmin:
             elif type(value) == datetime.date:
                 value = str(value)
                 ret = self.query("SELECT * FROM {} WHERE {}='{}';".format(tablename, searchby, value))
+            return ret
         except NameError:
             print('Your search returned 0 results.')
             return None
 
     def insert(self, tablename, data):
         """ This method will insert a new data to the database
-            tablename = The table name
+            tablename (str )= The table name
             data = The data to be input """
         colstr = ', '.join(data.keys())
         valstr = "'" + "', '".join(data.values()) + "'"
@@ -71,20 +75,24 @@ class GujekAdmin:
 
     def delete(self, tablename, searchby, value):
         """ This method will delete data from the database
-            tablename = The table name
-            searchby = 
-            value = The data to be deleted """
-        if not search(tablename, searchby, value):
+            tablename (str) = The table name
+            searchby (str) = The column name
+            value (str) = The data to be deleted """
+        result = self.search(tablename, searchby, value)
+        print(type(result))
+        if not result:
             print('Transaction failed: record not found.')
             return
-        self.query("DELETE FROM {} WHERE {}='{}';".format(tablename,searchby,value))
+        q = "DELETE FROM {} WHERE {}='{}';".format(tablename,searchby,value)
+        self.query(q)
+        print(q)
         
     def edit(self, tablename, searchby, value, data):
         """ This method will edit a chosen data from the database
-            tablename = The table name
-            searchby = 
-            value = The data to be edited
-            data = The new data for value"""
+            tablename (str) = The table name
+            searchby (str) = The column name
+            value (str) = The data to be edited
+            data (str) = The new data for value"""
         if not search(tablename, searchby, value):
             print('Transaction failed: record not found.')
             return
