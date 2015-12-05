@@ -21,8 +21,11 @@ class GujekAdmin:
     def show_table(self, tablename):
         """ This method will show a table in the database
             tablename = The table name """
-        return self.query("SELECT * FROM {};".format(tablename))
-        
+        try:
+            return self.query("SELECT * FROM {};".format(tablename))
+        except psycopg2.ProgrammingError as e:
+            print(e)
+            
     def print_table(self, tablename):
         """ This method will print the table in the IDLE
             tablename = The table name """
@@ -37,7 +40,6 @@ class GujekAdmin:
         except (psycopg2.Error,UnboundLocalError) as e:
             self.conn.rollback()
             print('Transaction failed: {}'.format(e))
-        
 
     def search(self, tablename, searchby, value):
         """ This method will search the database for the given value and return its value
