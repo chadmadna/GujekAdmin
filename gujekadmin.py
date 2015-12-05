@@ -9,6 +9,7 @@ class GujekAdmin:
         self._pass = password
 
     def query(self, querystr):
+        """ This method is used to access the database using Postgresql """
         try:
             self.cur.execute(querystr)
             self.conn.commit()
@@ -23,7 +24,7 @@ class GujekAdmin:
             
     def show_table(self, tablename):
         """ This method will show a table in the database
-            tablename = The table name """
+            tablename (str) = The table name """
         try:
             return self.query("SELECT * FROM {};".format(tablename))
         except psycopg2.Error as e:
@@ -31,7 +32,7 @@ class GujekAdmin:
             
     def print_table(self, tablename):
         """ This method will print the table in the IDLE
-            tablename = The table name """
+            tablename (str) = The table name """
         try:
             self.cur.execute('SELECT * FROM {};'.format(tablename))
             columns = [desc[0] for desc in self.cur.description]
@@ -72,6 +73,7 @@ class GujekAdmin:
         colstr = ', '.join(data.keys())
         valstr = "'" + "', '".join(data.values()) + "'"
         self.query("INSERT INTO {} ({}) VALUES ({});".format(tablename,columns,values))
+        ######## columns and values not defined
 
     def delete(self, tablename, searchby, value):
         """ This method will delete data from the database
@@ -103,4 +105,4 @@ class GujekAdmin:
 
 if __name__ == '__main__':
     pw = getpass.getpass()
-    gujek = GujekAdmin('postgres', 'gujek', 'localhost', '<Enter>')
+    gujek = GujekAdmin('postgres', 'gujek', 'localhost', 'pw')
