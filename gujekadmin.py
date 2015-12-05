@@ -1,7 +1,6 @@
 import psycopg2, datetime
 
 class GujekAdmin:
-    
     def __init__(self, user, dbname, host):
         self.conn = psycopg2.connect('user={} dbname={} host={}'.format(user,dbname,host))
         self.cur = self.conn.cursor()
@@ -27,26 +26,30 @@ class GujekAdmin:
         except psycopg2.Error as e:
             self.conn.rollback()
             print('Transaction failed: {}'.format(e))
-        print(', '.join(columns))
+        
         table = self.cur.fetchall()
+        result = []
+        result.append(', '.join(columns))
         for tup in table:
-            print(', '.join([str(i) for i in tup]))
+            result.append(', '.join([str(i) for i in tup]))
+        return result
 
     def search(self, tablename, searchby, value):
-        if type(value) == int:
-            ret = self.query("SELECT * FROM {} WHERE {}={};".format(tablename, searchby, value))
-        elif type(value) == str:
-            ret = self.query("SELECT * FROM {} WHERE {} LIKE '%{}%';".format(tablename, searchby, value))
-        elif type(value) == datetime.datetime:
-            value = str(value)
-            ret = self.query("SELECT * FROM {} WHERE {}='{}';".format(tablename, searchby, value))
-        elif type(value) == datetime.date:
-            value = str(value)
-            ret = self.query("SELECT * FROM {} WHERE {}='{}';".format(tablename, searchby, value))
-        if ret:
+        try:
+            if type(value) == int:
+                ret = self.query("SELECT * FROM {} WHERE {}={};".format(tablename, searchby, value))
+            elif type(value) == str:
+                ret = self.query("SELECT * FROM {} WHERE {} LIKE '%{}%';".format(tablename, searchby, value))
+            elif type(value) == datetime.datetime:
+                value = str(value)
+                ret = self.query("SELECT * FROM {} WHERE {}='{}';".format(tablename, searchby, value))
+            elif type(value) == datetime.date:
+                value = str(value)
+                ret = self.query("SELECT * FROM {} WHERE {}='{}';".format(tablename, searchby, value))
             return ret
-        else:
+        except NameError:
             print('Your search returned 0 results.')
+            return None
 
     def insert(self, tablename, data):
         colstr = ', '.join(data.keys())
