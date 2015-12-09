@@ -153,7 +153,8 @@ ALTER TABLE employee OWNER TO irsyadnabil;
 CREATE TABLE food (
     tr_id integer NOT NULL,
     "time" timestamp without time zone NOT NULL,
-    menu_item text NOT NULL
+    menu_item text NOT NULL,
+    restaurant text
 );
 
 
@@ -396,19 +397,19 @@ COPY employee (id, s_id, name, dob, phone, address, gender) FROM stdin;
 -- Data for Name: food; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
 --
 
-COPY food (tr_id, "time", menu_item) FROM stdin;
-991796	2015-11-21 16:00:44	Ayam Goreng Istimewa
-991796	2015-11-21 16:00:44	Udang Goreng Tepung
-991796	2015-11-21 16:00:44	Sayur Bayam
-991582	2015-08-12 08:27:57	Pappardelle with Mushrooms
-991582	2015-08-12 08:27:57	Supercrunch Tofu Tacos
-991582	2015-08-12 08:27:57	Penne with Herbs and Tomatoes
-991579	2015-07-10 11:11:24	Chargrilled Aubergine Rolls
-991579	2015-07-10 11:11:24	Fish and Chips
-991579	2015-07-10 11:11:24	Fish Pie
-991690	2015-01-11 20:53:12	Mushroom Dabu-dabu Rice with Sirloin
-991690	2015-01-11 20:53:12	Carbonara Rice with Mushroom and Basil
-991690	2015-01-11 20:53:12	Iced Lemon Tea
+COPY food (tr_id, "time", menu_item, restaurant) FROM stdin;
+991582	2015-08-12 08:27:57	Pappardelle with Mushrooms	1/15 Coffee Gandaria
+991582	2015-08-12 08:27:57	Supercrunch Tofu Tacos	1/15 Coffee Gandaria
+991582	2015-08-12 08:27:57	Penne with Herbs and Tomatoes	1/15 Coffee Gandaria
+991579	2015-07-10 11:11:24	Chargrilled Aubergine Rolls	Fish & Co. Tebet
+991579	2015-07-10 11:11:24	Fish and Chips	Fish & Co. Tebet
+991579	2015-07-10 11:11:24	Fish Pie	Fish & Co. Tebet
+991690	2015-01-11 20:53:12	Mushroom Dabu-dabu Rice with Sirloin	Toodz House
+991690	2015-01-11 20:53:12	Carbonara Rice with Mushroom and Basil	Toodz House
+991690	2015-01-11 20:53:12	Iced Lemon Tea	Toodz House
+991796	2015-11-21 16:00:44	Ayam Goreng Istimewa	Ikan Bakar Cianjur Pecenongan
+991796	2015-11-21 16:00:44	Udang Goreng Tepung	Ikan Bakar Cianjur Pecenongan
+991796	2015-11-21 16:00:44	Sayur Bayam	Ikan Bakar Cianjur Pecenongan
 \.
 
 
@@ -738,6 +739,14 @@ ALTER TABLE ONLY app_designer
 
 ALTER TABLE ONLY driver
     ADD CONSTRAINT driver_id_fkey FOREIGN KEY (id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: menu_fkey; Type: FK CONSTRAINT; Schema: public; Owner: irsyadnabil
+--
+
+ALTER TABLE ONLY food
+    ADD CONSTRAINT menu_fkey FOREIGN KEY (menu_item, restaurant) REFERENCES menu_item(name, restaurant);
 
 
 --
