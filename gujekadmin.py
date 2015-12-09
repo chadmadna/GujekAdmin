@@ -2,9 +2,10 @@ import psycopg2, datetime, getpass
 
 class GujekAdmin:
     
-    def __init__(self, user, dbname, host, password = None):
+    def __init__(self, user, dbname, host, password=None):
         """ This class is used to connect the database Postgresql with the GUI through python programming """
-        self.conn = psycopg2.connect('user={} dbname={} host={} password = {}'.format(user,dbname,host,password))
+##        self.conn = psycopg2.connect('user={} dbname={} host={} password = {}'.format(user,dbname,host,password))
+        self.conn = psycopg2.connect('user={} dbname={} host={} password={}'.format(user,dbname,host,password))
         self.cur = self.conn.cursor()
         self._pass = password
 
@@ -72,8 +73,8 @@ class GujekAdmin:
             data = The data to be input """
         colstr = ', '.join(data.keys())
         valstr = "'" + "', '".join(data.values()) + "'"
-        self.query("INSERT INTO {} ({}) VALUES ({});".format(tablename,columns,values))
-        ######## columns and values not defined
+        self.query("INSERT INTO {} ({}) VALUES ({});".format(tablename,colstr,valstr))
+        ######## columns and values not defined (fixed)
 
     def delete(self, tablename, searchby, value):
         """ This method will delete data from the database
@@ -89,20 +90,43 @@ class GujekAdmin:
         self.query(q)
         print(q)
         
-    def edit(self, tablename, searchby, value, data):
+    def edit(self, tablename, pkey={}, data={}):
         """ This method will edit a chosen data from the database
             tablename (str) = The table name
             searchby (str) = The column name
             value (str) = The data to be edited
             data (str) = The new data for value"""
-        if not search(tablename, searchby, value):
+        
+        pkey = sorted(pkey.items())
+        wherestr = ""
+        for pk in pkey:
+            if type(pk[1]) is int:
+                wherestr += "{}={} AND ".format(pk[0], pk[1])
+            if type(pk[1]) is str:
+                wherestr += "{}='{}' AND ".format(pk[0], str(pk[1]))
+        wherestr = wherestr[:-5]
+        q = "SELECT * FROM {} WHERE {};".format(tablename, wherestr)
+        print(q)
+        if not self.query(q):
             print('Transaction failed: record not found.')
             return
+        
         columns = data.keys()
         values = data.values()
-        setstr = ', '.join(['{}={}'.format(c,v) for c,v in zip(columns, values)])
-        self.query("UPDATE {} SET {} WHERE {}={};".format(tablename, setstr, columns[0], values[0]))
+        setstr = ', '.join(["{}='{}'".format(c,v) for c,v in zip(columns, values)])
+        self.query("UPDATE {} SET {} WHERE {};".format(tablename, setstr, wherestr))
+
+    def get_pkey(self, tablename):
+        ret = self.query("""SELECT column_name
+                            FROM information_schema.table_constraints
+                                 JOIN information_schema.key_column_usage
+                                     USING (constraint_catalog, constraint_schema, constraint_name,
+                                            table_catalog, table_schema, table_name)
+                            WHERE constraint_type = 'PRIMARY KEY'
+                              AND (table_schema, table_name) = ('public', '{}')
+                            ORDER BY ordinal_position;""".format(tablename))
+        return tuple(r[0] for r in ret) if ret else None
 
 if __name__ == '__main__':
-    pw = getpass.getpass()
-    gujek = GujekAdmin('postgres', 'gujek', 'localhost', 'pw')
+##    pw = getpass.getpass()
+    gujek = GujekAdmin('gujekadmin', 'gujek', 'localhost', 'admin1')
