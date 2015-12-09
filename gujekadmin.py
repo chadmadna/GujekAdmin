@@ -106,7 +106,6 @@ class GujekAdmin:
                 wherestr += "{}='{}' AND ".format(pk[0], str(pk[1]))
         wherestr = wherestr[:-5]
         q = "SELECT * FROM {} WHERE {};".format(tablename, wherestr)
-        print(q)
         if not self.query(q):
             print('Transaction failed: record not found.')
             return
