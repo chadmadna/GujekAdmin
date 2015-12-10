@@ -17,6 +17,7 @@ from tkinter.ttk import *
 class GUIjek:
     def __init__(self):
         root = Tk()
+        root.title("Gujek Database")
 
         #Initiate frame
         
