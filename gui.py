@@ -1,23 +1,20 @@
 from tkinter import *
 from tkinter.ttk import *
+from gujekadmin import GujekAdmin
 
 ##master = Tk()
 ##
-##scrollbar = Scrollbar(master)
-##scrollbar.pack(side=RIGHT, fill=Y)
-##
-##listbox = Listbox(master, yscrollcommand=scrollbar.set)
-##for i in range(1000):
-##    listbox.insert(END, str(i))
-##listbox.pack(side=LEFT, fill=BOTH)
-##
-##scrollbar.config(command=listbox.yview)
-##
+
+
 ##mainloop()
 class GUIjek:
     def __init__(self):
         root = Tk()
         root.title("Gujek Database")
+
+        #initiate main app
+
+        gujek = GujekAdmin('gujekadmin', 'gujek', 'localhost', 'admin1')
 
         #Initiate frame
         
@@ -36,9 +33,17 @@ class GUIjek:
         buttonDel.pack()
 
         #Initiate tree
-
-        self.tree = Treeview(treeframe,show='headings',columns=('uji','peler'))
+        scrollbar = Scrollbar(treeframe)
+        scrollbar.pack(fill=Y)
+        
+        self.tree = Treeview(treeframe,yscrollcommand=scrollbar.set,show='headings',columns=('uji','coba',',',',',',',',',',',))
         self.tree.pack(fill=BOTH,expand=1)
+        scrollbar.config(command=self.tree.yview)
+        #Add employee to table
+
+        for i in gujek.show_table("EMPLOYEE"):
+            self.tree.insert("",0,values=i)
+        
     def update(self):
         master=Toplevel()
         Label(master, text="First").grid(row=0,sticky=W)
