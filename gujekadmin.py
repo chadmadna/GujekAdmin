@@ -72,23 +72,20 @@ class GujekAdmin:
             tablename (str )= The table name
             data = The data to be input """
         colstr = ', '.join(data.keys())
-        valstr = "'" + "', '".join(data.values()) + "'"
+        valstr = "'" + "', '".join(tuple(str(v) for v in data.values())) + "'"
         self.query("INSERT INTO {} ({}) VALUES ({});".format(tablename,colstr,valstr))
-        ######## columns and values not defined (fixed)
 
-    def delete(self, tablename, searchby, value):
+    def delete(self, tablename, data):
         """ This method will delete data from the database
             tablename (str) = The table name
-            searchby (str) = The column name
-            value (str) = The data to be deleted """
-        result = self.search(tablename, searchby, value)
-        print(type(result))
-        if not result:
-            print('Transaction failed: record not found.')
-            return
-        q = "DELETE FROM {} WHERE {}='{}';".format(tablename,searchby,value)
+            data (dict) = The data that specifies deletion condition"""
+        wherestr = ""
+        for k, v in data.items():
+            if type(v) is str: v = "'{}'".format(v)
+            wherestr += "{}={} AND ".format(k, v)
+        wherestr = wherestr [:-5]
+        q = "DELETE FROM {} WHERE {};".format(tablename,wherestr)
         self.query(q)
-        print(q)
         
     def edit(self, tablename, pkey={}, data={}):
         """ This method will edit a chosen data from the database
@@ -125,6 +122,24 @@ class GujekAdmin:
                               AND (table_schema, table_name) = ('public', '{}')
                             ORDER BY ordinal_position;""".format(tablename))
         return tuple(r[0] for r in ret) if ret else None
+
+    def get_col_names(self, tablename):
+        try:
+            self.cur.execute('SELECT * FROM {};'.format(tablename))
+            columns = [desc[0] for desc in self.cur.description]
+            self.conn.commit()
+        except psycopg2.Error as e:
+            self.conn.rollback()
+            print('Transaction failed: {}'.format(e))
+        return columns
+
+    def get_table_names(self):
+        try:
+            self.cur.execute("SELECT relname FROM pg_class WHERE relkind='r' AND relname !~ '^(pg_|sql_)';")
+            return tuple(tablename[0] for tablename in self.cur.fetchall())
+        except psycopg2.Error as e:
+            self.conn.rollback()
+            print('Transaction failed: {}'.format(e))
 
 if __name__ == '__main__':
 ##    pw = getpass.getpass()

@@ -174,10 +174,10 @@ CREATE TABLE menu_item (
 ALTER TABLE menu_item OWNER TO irsyadnabil;
 
 --
--- Name: ratings; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
+-- Name: rating; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
 --
 
-CREATE TABLE ratings (
+CREATE TABLE rating (
     c_id integer NOT NULL,
     version text NOT NULL,
     rate integer NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE ratings (
 );
 
 
-ALTER TABLE ratings OWNER TO gujekadmin;
+ALTER TABLE rating OWNER TO irsyadnabil;
 
 --
 -- Name: restaurant; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
@@ -434,10 +434,10 @@ Iced Lemon Tea	Toodz House	19000
 
 
 --
--- Data for Name: ratings; Type: TABLE DATA; Schema: public; Owner: gujekadmin
+-- Data for Name: rating; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
 --
 
-COPY ratings (c_id, version, rate, comment) FROM stdin;
+COPY rating (c_id, version, rate, comment) FROM stdin;
 61982997	2.7.1	1	Cacad app nya
 61982553	2.4.5	5	Alhamdulillah, now I have more time for my lovely family, photography, and Gujek.
 61982920	2.7.0	4	Mantap gujek lanjutkan
@@ -646,10 +646,10 @@ ALTER TABLE ONLY menu_item
 
 
 --
--- Name: ratings_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
+-- Name: ratings_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
 --
 
-ALTER TABLE ONLY ratings
+ALTER TABLE ONLY rating
     ADD CONSTRAINT ratings_pkey PRIMARY KEY (c_id);
 
 
@@ -758,10 +758,10 @@ ALTER TABLE ONLY menu_item
 
 
 --
--- Name: ratings_c_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gujekadmin
+-- Name: ratings_c_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: irsyadnabil
 --
 
-ALTER TABLE ONLY ratings
+ALTER TABLE ONLY rating
     ADD CONSTRAINT ratings_c_id_fkey FOREIGN KEY (c_id) REFERENCES customer(c_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
