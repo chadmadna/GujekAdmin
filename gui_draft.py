@@ -51,6 +51,7 @@ class App(Tkinter.Tk):
         self.table_var.set(table)
         self.column_var = Tkinter.StringVar()
         self.column_var.set(tree_columns[0])
+        print(self.column_var.get())
 
         # Top panel
         self.top_panel = ttk.Frame(padding=(10,10,10,0))
@@ -97,7 +98,7 @@ class App(Tkinter.Tk):
             self.tree.heading(col, text=col.title(),
                 command=lambda c=col: sortby(self.tree, c, 0))
             self.tree.column(col, width=tkFont.Font().measure(col.title())+10)
-
+        
         try:
             for item in tree_data:
                 self.tree.insert('', 'end', values=[str(i) for i in item])
@@ -118,7 +119,6 @@ class App(Tkinter.Tk):
                 self.tree.column(len(tree_columns)-1, width=self.colwidth-colwidth)
         except UnboundLocalError:
             pass
-
     def _setup_popup(self):
         # Context menu
         self.context_menu = Tkinter.Menu(tearoff=0)
@@ -171,8 +171,12 @@ class App(Tkinter.Tk):
         self._setup_popup()
 
     def _set_table(self, value):
-        global table
+        global table, tree_columns
         table = value
+        tree_columns = gujek.get_col_names(table)
+        self.column_option.destroy()
+        self.column_option = ttk.OptionMenu(self.top_panel,self.column_var, tree_columns[0],*tree_columns)
+        self.column_option.grid(row=0,column=3,sticky='e')
         self._refresh()
 
     def popup(self, event):
