@@ -11,7 +11,7 @@ import tkinter.messagebox as mb
 import tkinter.ttk as ttk
 from gujekadmin import *
 
-gujek = GujekAdmin('gujekadmin', 'gujek', 'localhost', 'admin1')
+gujek = GujekAdmin('postgres', 'gujek', 'localhost', 'admin1')
 table_list = gujek.get_table_names()
 table = 'employee'
 tree_columns = gujek.get_col_names(table)
@@ -95,24 +95,27 @@ class App(Tkinter.Tk):
             self.tree.heading(col, text=col.title(),
                 command=lambda c=col: sortby(self.tree, c, 0))
             self.tree.column(col, width=tkFont.Font().measure(col.title())+10)
-        
-        for item in tree_data:
-            self.tree.insert('', 'end', values=[str(i) for i in item])
 
-            # adjust columns lenghts if necessary
-            colwidth = 0
-            for indx, val in enumerate(item):
-                ilen = tkFont.Font().measure(val)
-                if ilen > 150: ilen = 150
-                if self.tree.column(tree_columns[indx], width=None) < ilen:
-                    ilen += 10
-                    self.tree.column(tree_columns[indx], width=ilen)
-                colwidth += ilen
-                    
-        if len(tree_columns) >= 4:               
-            self.colwidth = colwidth
-        else:
-            self.tree.column(len(tree_columns)-1, width=self.colwidth-colwidth)
+        try:
+            for item in tree_data:
+                self.tree.insert('', 'end', values=[str(i) for i in item])
+
+                # adjust columns lenghts if necessary
+                colwidth = 0
+                for indx, val in enumerate(item):
+                    ilen = tkFont.Font().measure(val)
+                    if ilen > 150: ilen = 150
+                    if self.tree.column(tree_columns[indx], width=None) < ilen:
+                        ilen += 10
+                        self.tree.column(tree_columns[indx], width=ilen)
+                    colwidth += ilen
+                        
+            if len(tree_columns) >= 4:               
+                self.colwidth = colwidth
+            else:
+                self.tree.column(len(tree_columns)-1, width=self.colwidth-colwidth)
+        except UnboundLocalError:
+            pass
 
     def _setup_popup(self):
         # Context menu
