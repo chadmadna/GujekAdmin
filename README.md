@@ -15,15 +15,14 @@ A database administrator app for the Gu-Jek fictional company. Made for DB-1 Fas
 7.| ORDER BY| SELECT column_name(s) FROM table_name ORDER BY column_name [ASC|DESC]
 8.|WHERE|  SELECT column_name(s) FROM table_name WHERE column_name operator value
 9. | LIKE |SELECT column_name(s) WHERE column_name LIKE pattern
-10.| JOIN?? Left/right/Full?|
+10.| INNER JOIN |
 11. |
 #### How It Works
 	
 #### How To Use the Application
 Before you run the program:
-1. Make sure you use PostgreSQL 9.4
-2. Create a postgresql with user = 'gujekadmin' and password = 'admin1'
-3. open psql and type in CREATE USER gujekadmin with superuser password 'admin1';
+1. Make sure you use PostgreSQL 9.4.
+2. Create a postgresql with user = 'gujekadmin' and password = 'admin1' by opening psql and typing in ```CREATE USER gujekadmin WITH SUPERUSER password 'admin1';```
 
 #### Job Descriptions
 1. Farras Apsari P : Documentation, misc. Data
