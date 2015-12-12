@@ -38,6 +38,7 @@ class App(Tkinter.Tk):
     def __init__(self):
         Tkinter.Tk.__init__(self)
         self.title("GuJek")
+        self.iconbitmap(default = 'image/favicon.ico')
         self.resizable(0,0)
         self.tree = None
         self._setup_widgets()
@@ -51,7 +52,6 @@ class App(Tkinter.Tk):
         self.table_var.set(table)
         self.column_var = Tkinter.StringVar()
         self.column_var.set(tree_columns[0])
-        print(self.column_var.get())
 
         # Top panel
         self.top_panel = ttk.Frame(padding=(10,10,10,0))
