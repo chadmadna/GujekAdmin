@@ -23,7 +23,7 @@ A database administrator app for the Gu-Jek fictional company. Made for DB-1 Fas
 ##### Before you run the program:
 1. Make sure you use PostgreSQL 9.4.
 2. Create a postgresql with user='gujekadmin' and password='admin1'. 
-  *Open psql and type in ```CREATE USER gujekadmin WITH SUPERUSER password 'admin1';```
+  * Open psql and type in: ```CREATE USER gujekadmin WITH SUPERUSER password 'admin1';```.
 
 #### Job Descriptions
 1. Farras Apsari P : Documentation, misc. Data
