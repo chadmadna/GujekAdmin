@@ -46,6 +46,9 @@ class App(Tkinter.Tk):
         # Variables
         self.table_var = Tkinter.StringVar()
         self.table_var.set(table)
+        self.column_var = Tkinter.StringVar()
+        self.column_var.set(tree_columns[0])
+        print(self.column_var.get())
 
         # Top panel
         self.top_panel = ttk.Frame(padding=(10,10,10,0))
@@ -60,6 +63,16 @@ class App(Tkinter.Tk):
         self.table_option = ttk.OptionMenu(self.top_panel, self.table_var, "employee", *table_list, command=self._set_table)
         self.table_option.grid(row=0, column=1, sticky="e")
         ttk.Label(self.top_panel, text="Table:").grid(row=0, column=0, sticky="e")
+
+        # Search setup
+        ttk.Label(self.top_panel, text="Search on:").grid(row=0,column=2,sticky="e")
+        self.column_option = ttk.OptionMenu(self.top_panel,self.column_var, self.column_var.get(),*tree_columns)
+        self.column_option.grid(row=0,column=3,sticky='e')
+        self.search = Tkinter.Entry(self.top_panel)
+        self.search.grid(row=0,column=4,sticky='e')
+        search_button = Tkinter.Button(self.top_panel,text="Search",relief='raised',command=self.search_data)
+        search_button.grid(row=0,column=5,sticky='e',padx=10)
+        
 
     def _build_tree(self):
 
@@ -143,10 +156,11 @@ class App(Tkinter.Tk):
             btAdd = Tkinter.Button(form_window, text="Edit entry", command=formret)
             btAdd.grid(row=len(tree_columns)+1, column=0, columnspan=2)
             
-    def _refresh(self):
+    def _refresh(self,search=False):
         global tree_columns, tree_data
-        tree_columns = gujek.get_col_names(table)
-        tree_data = gujek.show_table(table)
+        if not search:
+            tree_columns = gujek.get_col_names(table)
+            tree_data = gujek.show_table(table)
         self.tree.destroy()
         self._build_tree()
         self._setup_popup()
@@ -166,6 +180,16 @@ class App(Tkinter.Tk):
             self.context_menu.post(event.x_root, event.y_root)
         else:
             pass
+        
+    def search_data(self):
+        global tree_data
+        search_term = self.search.get()
+        search_by = self.column_var.get()
+        tree_data = gujek.search(self.table_var.get(),search_by,search_term)
+        if tree_data:
+            self._refresh(True)
+        else:
+            mb.showinfo("No results found","Search returns 0 result.")
         
     def add(self):
         self._setup_form('add')
