@@ -11,11 +11,14 @@ import tkinter.messagebox as mb
 import tkinter.ttk as ttk
 from gujekadmin import *
 
-gujek = GujekAdmin('postgres', 'gujek', 'localhost', 'admin1')
-table_list = gujek.get_table_names()
-table = 'employee'
-tree_columns = gujek.get_col_names(table)
-tree_data = gujek.show_table(table)
+try:
+    gujek = GujekAdmin('gujekadmin', 'gujek', 'localhost', 'admin1')
+    table_list = gujek.get_table_names()
+    table = 'employee'
+    tree_columns = gujek.get_col_names(table)
+    tree_data = gujek.show_table(table)
+except psycopg2.OperationalError:
+    print('Could not connect to PostgreSQL, please open the README.txt')
 
 def sortby(tree, col, descending):
     """Sort tree contents when a column is clicked on."""
@@ -48,7 +51,6 @@ class App(Tkinter.Tk):
         self.table_var.set(table)
         self.column_var = Tkinter.StringVar()
         self.column_var.set(tree_columns[0])
-        print(self.column_var.get())
 
         # Top panel
         self.top_panel = ttk.Frame(padding=(10,10,10,0))
@@ -68,10 +70,10 @@ class App(Tkinter.Tk):
         ttk.Label(self.top_panel, text="Search on:").grid(row=0,column=2,sticky="e")
         self.column_option = ttk.OptionMenu(self.top_panel,self.column_var, self.column_var.get(),*tree_columns)
         self.column_option.grid(row=0,column=3,sticky='e')
-        self.search = Tkinter.Entry(self.top_panel)
+        self.search = ttk.Entry(self.top_panel)
         self.search.grid(row=0,column=4,sticky='e')
-        search_button = Tkinter.Button(self.top_panel,text="Search",relief='raised',command=self.search_data)
-        search_button.grid(row=0,column=5,sticky='e',padx=10)
+        search_button = ttk.Button(self.top_panel,text="Search",command=self.search_data)
+        search_button.grid(row=0,column=5,sticky='e',padx=5)
         
 
     def _build_tree(self):
