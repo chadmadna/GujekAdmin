@@ -1,10 +1,9 @@
-import psycopg2, datetime, getpass
+import psycopg2, datetime
 
 class GujekAdmin:
     
     def __init__(self, user, dbname, host, password=None):
         """ This class is used to connect the database Postgresql with the GUI through python programming """
-##        self.conn = psycopg2.connect('user={} dbname={} host={} password = {}'.format(user,dbname,host,password))
         self.conn = psycopg2.connect('user={} dbname={} host={} password={}'.format(user,dbname,host,password))
         self.cur = self.conn.cursor()
         self._pass = password
@@ -75,7 +74,7 @@ class GujekAdmin:
         valstr = "'" + "', '".join(tuple(str(v) for v in data.values())) + "'"
         self.query("INSERT INTO {} ({}) VALUES ({});".format(tablename,colstr,valstr))
 
-    def delete(self, tablename, data):
+    def delete(self, tablename, data={}):
         """ This method will delete data from the database
             tablename (str) = The table name
             data (dict) = The data that specifies deletion condition"""
@@ -87,20 +86,16 @@ class GujekAdmin:
         q = "DELETE FROM {} WHERE {};".format(tablename,wherestr)
         self.query(q)
         
-    def edit(self, tablename, pkey={}, data={}):
+    def edit(self, tablename, old_data={}, data={}):
         """ This method will edit a chosen data from the database
             tablename (str) = The table name
             searchby (str) = The column name
             value (str) = The data to be edited
-            data (str) = The new data for value"""
-        
-        pkey = sorted(pkey.items())
+            data (str) = The new data for value""" 
         wherestr = ""
-        for pk in pkey:
-            if type(pk[1]) is int:
-                wherestr += "{}={} AND ".format(pk[0], pk[1])
-            if type(pk[1]) is str:
-                wherestr += "{}='{}' AND ".format(pk[0], str(pk[1]))
+        for k, v in old_data.items():
+            if type(v) is str: v = "'{}'".format(v)
+            wherestr += "{}={} AND ".format(k, v)
         wherestr = wherestr[:-5]
         q = "SELECT * FROM {} WHERE {};".format(tablename, wherestr)
         if not self.query(q):
@@ -142,5 +137,4 @@ class GujekAdmin:
             print('Transaction failed: {}'.format(e))
 
 if __name__ == '__main__':
-##    pw = getpass.getpass()
     gujek = GujekAdmin('gujekadmin', 'gujek', 'localhost', 'admin1')
