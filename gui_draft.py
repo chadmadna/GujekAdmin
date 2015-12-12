@@ -120,6 +120,8 @@ class App(Tkinter.Tk):
         for i in range(len(tree_columns)):
             Tkinter.Label(form_window, text='{}: '.format(tree_columns[i])).grid(column=0,row=i, sticky="w")
             entries[tree_columns[i]] = Tkinter.Entry(form_window, width=60)
+            if action=='edit':
+                entries[tree_columns[i]].insert(0,self.item[i])
             entries[tree_columns[i]].grid(column=1,row=i)
         def formret():
             for k in entries.keys():
@@ -156,9 +158,10 @@ class App(Tkinter.Tk):
 
     def popup(self, event):
         iid = self.tree.identify_row(event.y)
-        self.item = dict(zip(tree_columns, self.tree.item(self.tree.focus())['values']))
-        if 'phone' in self.item.keys():
-            self.item['phone'] = '0' + str(self.item['phone'])  # Fix bug in self.tree.item
+        self.item = self.tree.item(self.tree.focus())['values']
+        print(self.item)
+        #if 'phone' in self.item.keys():
+        #    self.item['phone'] = '0' + str(self.item['phone'])  # Fix bug in self.tree.item
         if self.item and iid:
             self.tree.selection_set(iid)
             self.context_menu.post(event.x_root, event.y_root)
