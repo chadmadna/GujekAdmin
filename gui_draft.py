@@ -38,8 +38,9 @@ class App(Tkinter.Tk):
     def __init__(self):
         Tkinter.Tk.__init__(self)
         self.title("GuJek")
-        self.iconbitmap(default = 'image/favicon.ico')
+        self.wm_iconbitmap('image/favicon.ico')
         self.resizable(0,0)
+        self.lift()
         self.tree = None
         self._setup_widgets()
         self._build_tree()
@@ -60,8 +61,7 @@ class App(Tkinter.Tk):
 
         # Container
         self.container = ttk.Frame(padding=(10,10,10,10), width=800, height=600)
-        self.container.pack()
-        self.container.pack_propagate(0)
+        self.container.pack(fill='both', expand=True)
 
         # Option menu for selecting table
         self.table_option = ttk.OptionMenu(self.top_panel, self.table_var, "employee", *table_list, command=self._set_table)
@@ -79,9 +79,14 @@ class App(Tkinter.Tk):
         
 
     def _build_tree(self):
+
+        # Empty filler column on right
+        new_tree_columns = tree_columns
+        if not new_tree_columns[-1] == ' ':
+            new_tree_columns.append(' ')
         
         # Table view
-        self.tree = ttk.Treeview(columns=tree_columns, show="headings")
+        self.tree = ttk.Treeview(columns=new_tree_columns, show="headings")
         vsb = ttk.Scrollbar(orient="vertical", command=self.tree.yview)
         hsb = ttk.Scrollbar(orient="horizontal", command=self.tree.xview)
         self.tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
@@ -92,7 +97,7 @@ class App(Tkinter.Tk):
         self.container.grid_columnconfigure(0, weight=1)
         self.container.grid_rowconfigure(0, weight=1)
             
-        for col in tree_columns:
+        for col in new_tree_columns:
             self.tree.heading(col, text=col.title(),
                 command=lambda c=col: sortby(self.tree, c, 0))
             self.tree.column(col, width=tkFont.Font().measure(col.title())+10)
@@ -189,10 +194,17 @@ class App(Tkinter.Tk):
             pass
         
     def search_data(self,event = None):
-        global tree_data
+        global tree_data, tree_columns
         search_term = self.search.get()
         search_by = self.column_var.get()
-        tree_data = gujek.search(self.table_var.get(),search_by,search_term)
+        coltype = gujek.get_col_types(table)[search_by]
+        if coltype == 'integer':
+            try:
+                search_term = int(search_term)
+            except ValueError:
+                mb.showinfo("No results found","Search returns 0 result.")
+                return
+        tree_data = gujek.search(table, search_by, search_term)
         if tree_data:
             self._refresh(True)
         else:
