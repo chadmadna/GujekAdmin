@@ -50,20 +50,13 @@ class GujekAdmin:
             tablename (str) = The table name
             searchby (str) = The column name
             value (str) = The search key """
+        coltypes = self.get_col_types(tablename)
         try:
-            value = int(value)
-        except ValueError:
-            pass
-        
-        try:
-            if type(value) == int:
-                ret = self.query("SELECT * FROM {} WHERE {}={};".format(tablename, searchby, value))
-            elif type(value) == str:
+            if coltypes[searchby] == 'integer':
+                ret = self.query("SELECT * FROM {} WHERE CAST({} AS TEXT) LIKE '{}%';".format(tablename, searchby, value))
+            elif coltypes[searchby] == 'character varying':
                 ret = self.query("SELECT * FROM {} WHERE {} LIKE '%{}%';".format(tablename, searchby, value))
-            elif type(value) == datetime.datetime:
-                value = str(value)
-                ret = self.query("SELECT * FROM {} WHERE {}='{}';".format(tablename, searchby, value))
-            elif type(value) == datetime.date:
+            elif coltypes[searchby] == 'timestamp without time zone' or coltypes[searchby] == 'date':
                 value = str(value)
                 ret = self.query("SELECT * FROM {} WHERE {}='{}';".format(tablename, searchby, value))
             return ret
@@ -137,6 +130,14 @@ class GujekAdmin:
         try:
             self.cur.execute("SELECT relname FROM pg_class WHERE relkind='r' AND relname !~ '^(pg_|sql_)';")
             return tuple(tablename[0] for tablename in self.cur.fetchall())
+        except psycopg2.Error as e:
+            self.conn.rollback()
+            print('Transaction failed: {}'.format(e))
+
+    def get_col_types(self, tablename):
+        try:
+            self.cur.execute("SELECT column_name, data_type FROM information_schema.columns WHERE table_name='{}';".format(tablename))
+            return {k: v for k,v in self.cur.fetchall()}
         except psycopg2.Error as e:
             self.conn.rollback()
             print('Transaction failed: {}'.format(e))
