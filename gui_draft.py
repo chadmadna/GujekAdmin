@@ -79,9 +79,6 @@ class App(Tkinter.Tk):
         
 
     def _build_tree(self):
-
-        if len(tree_columns) < 4:
-            tree_columns.append(' ')
         
         # Table view
         self.tree = ttk.Treeview(columns=tree_columns, show="headings")
