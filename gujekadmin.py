@@ -51,6 +51,11 @@ class GujekAdmin:
             searchby (str) = The column name
             value (str) = The search key """
         try:
+            value = int(value)
+        except ValueError:
+            pass
+        
+        try:
             if type(value) == int:
                 ret = self.query("SELECT * FROM {} WHERE {}={};".format(tablename, searchby, value))
             elif type(value) == str:
