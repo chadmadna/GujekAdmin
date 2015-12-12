@@ -18,7 +18,12 @@ A database administrator app for the Gu-Jek fictional company. Made for DB-1 Fas
 10.| JOIN?? Left/right/Full?|
 11. |
 #### How It Works
-
++
++Before you run the program:
++	1. Make sure you use PostgreSQL 9.4
++	2. Create a postgresql with user = 'gujekadmin' and password = 'admin1'
++		open psql and type in CREATE USER gujekadmin with superuser password 'admin1';
++		
 #### How To Use the Application
 1.
 2.
