@@ -44,6 +44,7 @@ class App(Tkinter.Tk):
         self._setup_widgets()
         self._build_tree()
         self._setup_popup()
+        self.bind("<Return>",self.search_data)
 
     def _setup_widgets(self):
 
@@ -190,7 +191,7 @@ class App(Tkinter.Tk):
         else:
             pass
         
-    def search_data(self):
+    def search_data(self,event = None):
         global tree_data
         search_term = self.search.get()
         search_by = self.column_var.get()
