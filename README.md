@@ -3,6 +3,13 @@ A database administrator app for the Gu-Jek fictional company. Made for DB-1 Fas
 ### Report
 (contains how it works, list of SQL statements, steps of using app, job desc)
 
+
+#### Before you run the program:
+1. Make sure you use PostgreSQL 9.4.
+2. Create a postgresql with user='gujekadmin' and password='admin1'. 
+  * Open psql and type in: ```CREATE USER gujekadmin WITH SUPERUSER password 'admin1';```.
+
+
 #### SQL Statements
 | No. | SQL Statements | Syntax                                                                                      |
 |-----|----------------|---------------------------------------------------------------------------------------------|
@@ -18,12 +25,14 @@ A database administrator app for the Gu-Jek fictional company. Made for DB-1 Fas
 |10.  | INNER JOIN     |
 |11.  |
 #### How It Works
+	The program is divided into 3 section:
+	1. The GuJek database that contains information about the company (employee, department, etc)
+	2. The Graphic User Interface (GUI) that the user can run and operates on
+	3. And the python program that connects the GUI with the database.
 	
 #### How To Use the Application
-##### Before you run the program:
-1. Make sure you use PostgreSQL 9.4.
-2. Create a postgresql with user='gujekadmin' and password='admin1'. 
-  * Open psql and type in: ```CREATE USER gujekadmin WITH SUPERUSER password 'admin1';```.
+
+
 
 #### Job Descriptions
 1. Farras Apsari P : Documentation, misc. Data
