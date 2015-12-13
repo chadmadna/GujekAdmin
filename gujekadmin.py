@@ -114,6 +114,7 @@ class GujekAdmin:
         self.query("UPDATE {} SET {} WHERE {};".format(tablename, setstr, wherestr))
 
     def get_pkey(self, tablename):
+        """ This method is used to retrieve the primary key """
         ret = self.query("""SELECT column_name
                             FROM information_schema.table_constraints
                                  JOIN information_schema.key_column_usage
@@ -125,6 +126,7 @@ class GujekAdmin:
         return tuple(r[0] for r in ret) if ret else None
 
     def get_col_names(self, tablename):
+        """ This method is used to retrieve the column names """
         try:
             self.cur.execute('SELECT * FROM {};'.format(tablename))
             columns = [desc[0] for desc in self.cur.description]
@@ -135,6 +137,7 @@ class GujekAdmin:
         return columns
 
     def get_table_names(self):
+        """ This method is used to retrieve the table's name """
         try:
             self.cur.execute("SELECT relname FROM pg_class WHERE relkind='r' AND relname !~ '^(pg_|sql_)';")
             return tuple(tablename[0] for tablename in self.cur.fetchall())
@@ -143,6 +146,7 @@ class GujekAdmin:
             print('Transaction failed: {}'.format(e))
 
     def get_col_types(self, tablename):
+        """ This method is used to retrieve the column type """
         try:
             self.cur.execute("SELECT column_name, data_type FROM information_schema.columns WHERE table_name='{}';".format(tablename))
             return {k: v for k,v in self.cur.fetchall()}
