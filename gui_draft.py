@@ -190,7 +190,6 @@ class App(Tkinter.Tk):
     def popup(self, event):
         iid = self.tree.identify_row(event.y)
         self.item = dict(zip(tree_columns, self.tree.item(self.tree.focus())['values']))
-        print(self.item)
         if 'phone' in self.item.keys():
             self.item['phone'] = '0' + str(self.item['phone'])  # Fix bug in self.tree.item
         if self.item and iid:

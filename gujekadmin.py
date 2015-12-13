@@ -14,7 +14,6 @@ class GujekAdmin:
         try:
             self.cur.execute(querystr)
             self.conn.commit()
-            print(querystr)
         except psycopg2.Error as e:
             self.conn.rollback()
             print('Transaction failed: {}'.format(e))
@@ -63,7 +62,6 @@ class GujekAdmin:
                 value = str(value)
                 querystr = "SELECT * FROM {} WHERE {}='{}';".format(tablename, searchby, value)
             ret = self.query(querystr)
-            print(querystr)
             return ret
         except NameError as e:
             print(e)
