@@ -138,11 +138,14 @@ class App(Tkinter.Tk):
         form_window.config(padx=10, pady=10)    
         entries = dict()
         ret = dict()
-        for i in range(len(tree_columns)):
+        for i in range(len(tree_columns)-1):
             Tkinter.Label(form_window, text='{}: '.format(tree_columns[i])).grid(column=0,row=i, sticky="w")
             entries[tree_columns[i]] = Tkinter.Entry(form_window, width=60)
             if action=='edit':
-                entries[tree_columns[i]].insert(0,self.item[tree_columns[i]])
+                try:
+                    entries[tree_columns[i]].insert(0,self.item[tree_columns[i]])
+                except KeyError:
+                    pass
             entries[tree_columns[i]].grid(column=1,row=i)
         def formret():
             for k in entries.keys():
@@ -156,11 +159,13 @@ class App(Tkinter.Tk):
             self._refresh()
             form_window.destroy()
         if action == 'add':
-            form_window.title('Add entry')
+            form_window.title('GuJek - Add entry')
+            form_window.wm_iconbitmap('image/favicon.ico')
             btAdd = Tkinter.Button(form_window, text="Add entry", command=formret)
             btAdd.grid(row=len(tree_columns)+1, column=0, columnspan=2)
         if action == 'edit':
-            form_window.title('Edit entry')
+            form_window.title('GuJek - Edit entry')
+            form_window.wm_iconbitmap('image/favicon.ico')
             btAdd = Tkinter.Button(form_window, text="Edit entry", command=formret)
             btAdd.grid(row=len(tree_columns)+1, column=0, columnspan=2)
             
@@ -185,6 +190,7 @@ class App(Tkinter.Tk):
     def popup(self, event):
         iid = self.tree.identify_row(event.y)
         self.item = dict(zip(tree_columns, self.tree.item(self.tree.focus())['values']))
+        print(self.item)
         if 'phone' in self.item.keys():
             self.item['phone'] = '0' + str(self.item['phone'])  # Fix bug in self.tree.item
         if self.item and iid:

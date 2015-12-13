@@ -1,4 +1,5 @@
 import psycopg2, datetime
+from psycopg2.extensions import adapt
 
 class GujekAdmin:
     
@@ -13,6 +14,7 @@ class GujekAdmin:
         try:
             self.cur.execute(querystr)
             self.conn.commit()
+            print(querystr)
         except psycopg2.Error as e:
             self.conn.rollback()
             print('Transaction failed: {}'.format(e))
@@ -51,16 +53,20 @@ class GujekAdmin:
             searchby (str) = The column name
             value (str) = The search key """
         coltypes = self.get_col_types(tablename)
+        print(coltypes[searchby])
         try:
             if coltypes[searchby] == 'integer':
-                ret = self.query("SELECT * FROM {} WHERE CAST({} AS TEXT) LIKE '{}%';".format(tablename, searchby, value))
-            elif coltypes[searchby] == 'character varying':
-                ret = self.query("SELECT * FROM {} WHERE {} LIKE '%{}%';".format(tablename, searchby, value))
+                querystr = "SELECT * FROM {} WHERE CAST({} AS TEXT) LIKE '{}%';".format(tablename, searchby, value)
+            elif coltypes[searchby] == 'character varying' or coltypes[searchby] == 'text':
+                querystr = "SELECT * FROM {} WHERE {} ILIKE '%{}%';".format(tablename, searchby, value)
             elif coltypes[searchby] == 'timestamp without time zone' or coltypes[searchby] == 'date':
                 value = str(value)
-                ret = self.query("SELECT * FROM {} WHERE {}='{}';".format(tablename, searchby, value))
+                querystr = "SELECT * FROM {} WHERE {}='{}';".format(tablename, searchby, value)
+            ret = self.query(querystr)
+            print(querystr)
             return ret
-        except NameError:
+        except NameError as e:
+            print(e)
             print('Your search returned 0 results.')
             return None
 
@@ -69,7 +75,7 @@ class GujekAdmin:
             tablename (str )= The table name
             data = The data to be input """
         colstr = ', '.join(data.keys())
-        valstr = "'" + "', '".join(tuple(str(v) for v in data.values())) + "'"
+        valstr = "'" + "', '".join(tuple(adapt(str(v)) for v in data.values())) + "'"
         self.query("INSERT INTO {} ({}) VALUES ({});".format(tablename,colstr,valstr))
 
     def delete(self, tablename, data={}):
@@ -80,7 +86,7 @@ class GujekAdmin:
         for k, v in data.items():
             if type(v) is str: v = "'{}'".format(v)
             wherestr += "{}={} AND ".format(k, v)
-        wherestr = wherestr [:-5]
+        wherestr = wherestr[:-5]
         q = "DELETE FROM {} WHERE {};".format(tablename,wherestr)
         self.query(q)
         
@@ -92,7 +98,7 @@ class GujekAdmin:
             data (str) = The new data for value""" 
         wherestr = ""
         for k, v in old_data.items():
-            if type(v) is str: v = "'{}'".format(v)
+            if type(v) is str: v = adapt(v)
             wherestr += "{}={} AND ".format(k, v)
         wherestr = wherestr[:-5]
         q = "SELECT * FROM {} WHERE {};".format(tablename, wherestr)
@@ -102,7 +108,7 @@ class GujekAdmin:
         
         columns = data.keys()
         values = data.values()
-        setstr = ', '.join(["{}='{}'".format(c,v) for c,v in zip(columns, values)])
+        setstr = ', '.join(["{}={}".format(c,adapt(v)) for c,v in zip(columns, values)])
         self.query("UPDATE {} SET {} WHERE {};".format(tablename, setstr, wherestr))
 
     def get_pkey(self, tablename):
