@@ -36,6 +36,9 @@ def sortby(tree, col, descending):
 
 class App(Tkinter.Tk):
     def __init__(self):
+        """ This class is used to display the tables from the database using python based programing.
+            for this class to work, gujekadmin must first be imported """
+        
         Tkinter.Tk.__init__(self)
         self.title("GuJek")
         self.wm_iconbitmap('image/favicon.ico')
@@ -48,7 +51,8 @@ class App(Tkinter.Tk):
         self.bind("<Return>",self.search_data)
 
     def _setup_widgets(self):
-
+        """ This method is used to setup the dropdown menus and the search setup """
+        
         # Variables
         self.table_var = Tkinter.StringVar()
         self.table_var.set(table)
@@ -79,7 +83,8 @@ class App(Tkinter.Tk):
         
 
     def _build_tree(self):
-
+        """ This method is used to show the table from the database and shows it in the window """
+        
         # Empty filler column on right
         new_tree_columns = tree_columns
         if not new_tree_columns[-1] == ' ':
@@ -123,6 +128,11 @@ class App(Tkinter.Tk):
         except UnboundLocalError:
             pass
     def _setup_popup(self):
+        """ This method is invoken a user right clicks on the table, it will show the Add, Edit, Delete, and Print menu.
+            1. Add Row will add the table with a new record/entry into the table.
+            2. Edit Row will edit the chosen row's information
+            3. Delete Row will delete the chosen row from the database
+            4. Print Row will print the row's information in the terminal"""
         # Context menu
         self.context_menu = Tkinter.Menu(tearoff=0)
         self.context_menu.add_command(label="Add Row", command=self.add)
@@ -134,6 +144,7 @@ class App(Tkinter.Tk):
         self.tree.bind("<Button-2>", self.popup)
 
     def _setup_form(self, action):
+        """ This method will prompt the user with information needed, it varies according to its action command from the _setup_popup method """
         form_window = Tkinter.Toplevel()
         form_window.config(padx=10, pady=10)    
         entries = dict()
@@ -170,6 +181,7 @@ class App(Tkinter.Tk):
             btAdd.grid(row=len(tree_columns)+1, column=0, columnspan=2)
             
     def _refresh(self,search=False):
+        """ This method refreshes the table shown with the latest input"""
         global tree_columns, tree_data
         if not search:
             tree_columns = gujek.get_col_names(table)
@@ -179,6 +191,7 @@ class App(Tkinter.Tk):
         self._setup_popup()
 
     def _set_table(self, value):
+        """ This method will change the table shown in the window """
         global table, tree_columns
         table = value
         tree_columns = gujek.get_col_names(table)

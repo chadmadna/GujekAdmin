@@ -45,6 +45,7 @@ class GujekAdmin:
         except (psycopg2.Error,UnboundLocalError) as e:
             self.conn.rollback()
             print('Transaction failed: {}'.format(e))
+        
 
     def search(self, tablename, searchby, value):
         """ This method will search the database for the given value and return its value
@@ -72,10 +73,13 @@ class GujekAdmin:
         """ This method will insert a new data to the database
             tablename (str )= The table name
             data = The data to be input """
-        colstr = ', '.join(data.keys())
-        valstr = "'" + "', '".join(tuple(adapt(str(v)) for v in data.values())) + "'"
-        self.query("INSERT INTO {} ({}) VALUES ({});".format(tablename,colstr,valstr))
-
+        try:
+            colstr = ', '.join(data.keys())
+            valstr = "'" + "', '".join(tuple(adapt(str(v)) for v in data.values())) + "'"
+            self.query("INSERT INTO {} ({}) VALUES ({});".format(tablename,colstr,valstr))
+        except TypeError as e:
+            print('Please input the correct information needed')
+            
     def delete(self, tablename, data={}):
         """ This method will delete data from the database
             tablename (str) = The table name

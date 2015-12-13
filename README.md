@@ -29,7 +29,18 @@ A database administrator app for the Gu-Jek fictional company. Made for DB-1 Fas
 	1. The GuJek database that contains information about the company (employee, department, etc)
 	2. The Graphic User Interface (GUI) that the user can run and operates on
 	3. And the python program that connects the GUI with the database.
-	
+
+	Program features:
+	1. Viewing a table in the database: 
+		The program will show 'employee' table as its default. When a user selects a different table from the drop down menu, it will access the new table and shows it on the window. It uses the show_table in the python program which uses the SELECT * SQL statement.
+	2. Adding a record/entry to a table:
+		The user will be prompted to fill the information needed for the table using the _setup_form method from the App class. The input will be put as a tuple and the program will use the insert method from the GujekAdmin class. This method will then prompt the INSERT INTO SQL statement.
+	3. Editing a record/entry:
+
+	4. Deleting a record/entry:
+	5. Ordering a table by the chosen column:
+	6. Searching a record/entry from a column in the table:
+
 #### How To Use the Application
 
 
