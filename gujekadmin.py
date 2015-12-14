@@ -53,12 +53,16 @@ class GujekAdmin:
             searchby (str) = The column name
             value (str) = The search key """
         coltypes = self.get_col_types(tablename)
-        print(coltypes[searchby])
+        multiword = ('name', 'type', 'goods', 'license',
+                     'education', 'restaurant', 'comment',
+                     'menu_item', 'address', 'destination')
         try:
             if coltypes[searchby] == 'integer':
                 querystr = "SELECT * FROM {} WHERE CAST({} AS TEXT) LIKE '{}%';".format(tablename, searchby, value)
-            elif coltypes[searchby] == 'character varying' or coltypes[searchby] == 'text':
+            elif coltypes[searchby] == 'character varying' or coltypes[searchby] == 'text' and searchby in multiword:
                 querystr = "SELECT * FROM {} WHERE {} ILIKE '%{}%';".format(tablename, searchby, value)
+            elif coltypes[searchby] == 'character varying' or coltypes[searchby] == 'text' and searchby not in multiword:
+                querystr = "SELECT * FROM {} WHERE {} ILIKE '{}%';".format(tablename, searchby, value)
             elif coltypes[searchby] == 'timestamp without time zone' or coltypes[searchby] == 'date':
                 value = str(value)
                 querystr = "SELECT * FROM {} WHERE {}='{}';".format(tablename, searchby, value)
@@ -73,9 +77,15 @@ class GujekAdmin:
         """ This method will insert a new data to the database
             tablename (str )= The table name
             data = The data to be input """
+        coltypes = self.get_col_types(tablename)
+        for v in data.values():
+            if type(v) is str:
+                v = adapt(str(v))
+            if type(v) is int:
+                v = str(v)
         try:
             colstr = ', '.join(data.keys())
-            valstr = "'" + "', '".join(tuple(adapt(str(v)) for v in data.values())) + "'"
+            valstr = "'" + "', '".join(tuple(v for v in data.values())) + "'"
             self.query("INSERT INTO {} ({}) VALUES ({});".format(tablename,colstr,valstr))
         except TypeError as e:
             print('Please input the correct information needed')
@@ -91,6 +101,7 @@ class GujekAdmin:
         wherestr = wherestr[:-5]
         q = "DELETE FROM {} WHERE {};".format(tablename,wherestr)
         self.query(q)
+        print(q)
         
     def edit(self, tablename, old_data={}, data={}):
         """ This method will edit a chosen data from the database
