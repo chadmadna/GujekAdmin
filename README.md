@@ -19,17 +19,17 @@ A database administrator app for the Gu-Jek fictional company. Made for DB-1 Fas
 	SQL Statements used in the program
 	
 | No. |SQL Statements |Syntax |
-|----|-------|----------
+|----|-------|----------|
 |1.   | INSERT INTO    | INSERT INTO table_name (column1, column2, column3,...) VALUES (value1, value2, value3,....) |
-|2.   | SELECT         | SELECT column_name(s) FROM table_name                                                       |
-	|3.   | SELECT *       | SELECT * FROM table_name                                                                    |
-	|4.   | DELETE FROM    | DELETE FROM table_name WHERE some_column=some_value									  	 |
-	|5.   | UPDATE         | UPDATE table_name SET column1=value, column2=value,... WHERE some_column=some_value         |
-	|6.   | AND/OR         | SELECT column_name(s) FROM table_name WHERE condition AND/OR condition                      |
-	|7.   | ORDER BY       | SELECT column_name(s) FROM table_name ORDER BY column_name [ASC|DESC]                       |
-	|8.   | WHERE          | SELECT column_name(s) FROM table_name WHERE column_name operator value                      |
-	|9.   | LIKE           | SELECT column_name(s) WHERE column_name LIKE pattern                                        |
-	|10.  | INNER JOIN     |SELECT column_name(s) FROM table_name1 INNER JOIN table_name2 ON table_name1.column_name=table_name2.column_name |
+|2.   | SELECT         | SELECT column_name(s) FROM table_name  |
+|3.   | SELECT *       | SELECT * FROM table_name |
+|4.   | DELETE FROM    | DELETE FROM table_name WHERE some_column=some_value|
+|5.   | UPDATE         | UPDATE table_name SET column1=value, column2=value,... WHERE some_column=some_value   |
+|6.   | AND/OR         | SELECT column_name(s) FROM table_name WHERE condition AND/OR condition                      |
+|7.   | ORDER BY       | SELECT column_name(s) FROM table_name ORDER BY column_name [ASC|DESC]                       |
+|8.   | WHERE          | SELECT column_name(s) FROM table_name WHERE column_name operator value                      |
+|9.   | LIKE           | SELECT column_name(s) WHERE column_name LIKE pattern                                        |
+|10.  | INNER JOIN     |SELECT column_name(s) FROM table_name1 INNER JOIN table_name2 ON table_name1.column_name=table_name2.column_name |
 
 Program features:
 
