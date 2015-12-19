@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: analyst; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: analyst; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE analyst (
@@ -38,10 +38,10 @@ CREATE TABLE analyst (
 );
 
 
-ALTER TABLE analyst OWNER TO irsyadnabil;
+ALTER TABLE analyst OWNER TO gujekadmin;
 
 --
--- Name: app; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: app; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE app (
@@ -50,10 +50,10 @@ CREATE TABLE app (
 );
 
 
-ALTER TABLE app OWNER TO irsyadnabil;
+ALTER TABLE app OWNER TO gujekadmin;
 
 --
--- Name: app_designer; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: app_designer; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE app_designer (
@@ -63,10 +63,10 @@ CREATE TABLE app_designer (
 );
 
 
-ALTER TABLE app_designer OWNER TO irsyadnabil;
+ALTER TABLE app_designer OWNER TO gujekadmin;
 
 --
--- Name: customer; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: customer; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE customer (
@@ -82,10 +82,10 @@ CREATE TABLE customer (
 );
 
 
-ALTER TABLE customer OWNER TO irsyadnabil;
+ALTER TABLE customer OWNER TO gujekadmin;
 
 --
--- Name: delivery; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: delivery; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE delivery (
@@ -95,10 +95,10 @@ CREATE TABLE delivery (
 );
 
 
-ALTER TABLE delivery OWNER TO irsyadnabil;
+ALTER TABLE delivery OWNER TO gujekadmin;
 
 --
--- Name: driver; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: driver; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE driver (
@@ -106,10 +106,10 @@ CREATE TABLE driver (
 );
 
 
-ALTER TABLE driver OWNER TO irsyadnabil;
+ALTER TABLE driver OWNER TO gujekadmin;
 
 --
--- Name: driver_id_seq; Type: SEQUENCE; Schema: public; Owner: irsyadnabil
+-- Name: driver_id_seq; Type: SEQUENCE; Schema: public; Owner: gujekadmin
 --
 
 CREATE SEQUENCE driver_id_seq
@@ -120,17 +120,17 @@ CREATE SEQUENCE driver_id_seq
     CACHE 1;
 
 
-ALTER TABLE driver_id_seq OWNER TO irsyadnabil;
+ALTER TABLE driver_id_seq OWNER TO gujekadmin;
 
 --
--- Name: driver_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: irsyadnabil
+-- Name: driver_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gujekadmin
 --
 
 ALTER SEQUENCE driver_id_seq OWNED BY driver.id;
 
 
 --
--- Name: employee; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: employee; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE employee (
@@ -144,10 +144,10 @@ CREATE TABLE employee (
 );
 
 
-ALTER TABLE employee OWNER TO irsyadnabil;
+ALTER TABLE employee OWNER TO gujekadmin;
 
 --
--- Name: food; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: food; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE food (
@@ -158,10 +158,10 @@ CREATE TABLE food (
 );
 
 
-ALTER TABLE food OWNER TO irsyadnabil;
+ALTER TABLE food OWNER TO gujekadmin;
 
 --
--- Name: menu_item; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: menu_item; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE menu_item (
@@ -171,10 +171,10 @@ CREATE TABLE menu_item (
 );
 
 
-ALTER TABLE menu_item OWNER TO irsyadnabil;
+ALTER TABLE menu_item OWNER TO gujekadmin;
 
 --
--- Name: rating; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: rating; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE rating (
@@ -185,10 +185,10 @@ CREATE TABLE rating (
 );
 
 
-ALTER TABLE rating OWNER TO irsyadnabil;
+ALTER TABLE rating OWNER TO gujekadmin;
 
 --
--- Name: restaurant; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: restaurant; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE restaurant (
@@ -198,10 +198,10 @@ CREATE TABLE restaurant (
 );
 
 
-ALTER TABLE restaurant OWNER TO irsyadnabil;
+ALTER TABLE restaurant OWNER TO gujekadmin;
 
 --
--- Name: software_engineer; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: software_engineer; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE software_engineer (
@@ -209,10 +209,10 @@ CREATE TABLE software_engineer (
 );
 
 
-ALTER TABLE software_engineer OWNER TO irsyadnabil;
+ALTER TABLE software_engineer OWNER TO gujekadmin;
 
 --
--- Name: supervisor; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: supervisor; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE supervisor (
@@ -221,10 +221,10 @@ CREATE TABLE supervisor (
 );
 
 
-ALTER TABLE supervisor OWNER TO irsyadnabil;
+ALTER TABLE supervisor OWNER TO gujekadmin;
 
 --
--- Name: transaction; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: transaction; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE transaction (
@@ -235,10 +235,10 @@ CREATE TABLE transaction (
 );
 
 
-ALTER TABLE transaction OWNER TO irsyadnabil;
+ALTER TABLE transaction OWNER TO gujekadmin;
 
 --
--- Name: transport; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: transport; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE transport (
@@ -248,10 +248,10 @@ CREATE TABLE transport (
 );
 
 
-ALTER TABLE transport OWNER TO irsyadnabil;
+ALTER TABLE transport OWNER TO gujekadmin;
 
 --
--- Name: vehicle; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: vehicle; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE vehicle (
@@ -262,10 +262,10 @@ CREATE TABLE vehicle (
 );
 
 
-ALTER TABLE vehicle OWNER TO irsyadnabil;
+ALTER TABLE vehicle OWNER TO gujekadmin;
 
 --
--- Name: works_on; Type: TABLE; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: works_on; Type: TABLE; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 CREATE TABLE works_on (
@@ -275,17 +275,17 @@ CREATE TABLE works_on (
 );
 
 
-ALTER TABLE works_on OWNER TO irsyadnabil;
+ALTER TABLE works_on OWNER TO gujekadmin;
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: irsyadnabil
+-- Name: id; Type: DEFAULT; Schema: public; Owner: gujekadmin
 --
 
 ALTER TABLE ONLY driver ALTER COLUMN id SET DEFAULT nextval('driver_id_seq'::regclass);
 
 
 --
--- Data for Name: analyst; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: analyst; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY analyst (id) FROM stdin;
@@ -295,7 +295,7 @@ COPY analyst (id) FROM stdin;
 
 
 --
--- Data for Name: app; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: app; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY app (version, date) FROM stdin;
@@ -309,7 +309,7 @@ COPY app (version, date) FROM stdin;
 
 
 --
--- Data for Name: app_designer; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: app_designer; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY app_designer (id, email, education) FROM stdin;
@@ -322,7 +322,7 @@ COPY app_designer (id, email, education) FROM stdin;
 
 
 --
--- Data for Name: customer; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: customer; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY customer (c_id, name, email, password, username, phone, comment, version, rate) FROM stdin;
@@ -334,7 +334,7 @@ COPY customer (c_id, name, email, password, username, phone, comment, version, r
 
 
 --
--- Data for Name: delivery; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: delivery; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY delivery (tr_id, "time", goods) FROM stdin;
@@ -346,7 +346,7 @@ COPY delivery (tr_id, "time", goods) FROM stdin;
 
 
 --
--- Data for Name: driver; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: driver; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY driver (id) FROM stdin;
@@ -363,14 +363,14 @@ COPY driver (id) FROM stdin;
 
 
 --
--- Name: driver_id_seq; Type: SEQUENCE SET; Schema: public; Owner: irsyadnabil
+-- Name: driver_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gujekadmin
 --
 
 SELECT pg_catalog.setval('driver_id_seq', 1, false);
 
 
 --
--- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY employee (id, s_id, name, dob, phone, address, gender) FROM stdin;
@@ -394,7 +394,7 @@ COPY employee (id, s_id, name, dob, phone, address, gender) FROM stdin;
 
 
 --
--- Data for Name: food; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: food; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY food (tr_id, "time", menu_item, restaurant) FROM stdin;
@@ -414,7 +414,7 @@ COPY food (tr_id, "time", menu_item, restaurant) FROM stdin;
 
 
 --
--- Data for Name: menu_item; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: menu_item; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY menu_item (name, restaurant, price) FROM stdin;
@@ -434,7 +434,7 @@ Iced Lemon Tea	Toodz House	19000
 
 
 --
--- Data for Name: rating; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: rating; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY rating (c_id, version, rate, comment) FROM stdin;
@@ -446,7 +446,7 @@ COPY rating (c_id, version, rate, comment) FROM stdin;
 
 
 --
--- Data for Name: restaurant; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: restaurant; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY restaurant (name, address, phone) FROM stdin;
@@ -460,7 +460,7 @@ Tjap Toean Sudirman	fX Sudirman, Lantai F1, Jl. Jenderal Sudirman, Sudirman, Jak
 
 
 --
--- Data for Name: software_engineer; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: software_engineer; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY software_engineer (id) FROM stdin;
@@ -471,7 +471,7 @@ COPY software_engineer (id) FROM stdin;
 
 
 --
--- Data for Name: supervisor; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: supervisor; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY supervisor (id, email) FROM stdin;
@@ -481,7 +481,7 @@ COPY supervisor (id, email) FROM stdin;
 
 
 --
--- Data for Name: transaction; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: transaction; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY transaction (tr_id, "time", d_id, c_id) FROM stdin;
@@ -501,7 +501,7 @@ COPY transaction (tr_id, "time", d_id, c_id) FROM stdin;
 
 
 --
--- Data for Name: transport; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: transport; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY transport (tr_id, "time", destination) FROM stdin;
@@ -513,7 +513,7 @@ COPY transport (tr_id, "time", destination) FROM stdin;
 
 
 --
--- Data for Name: vehicle; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: vehicle; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY vehicle (d_id, license, type, year) FROM stdin;
@@ -530,7 +530,7 @@ COPY vehicle (d_id, license, type, year) FROM stdin;
 
 
 --
--- Data for Name: works_on; Type: TABLE DATA; Schema: public; Owner: irsyadnabil
+-- Data for Name: works_on; Type: TABLE DATA; Schema: public; Owner: gujekadmin
 --
 
 COPY works_on (ad_id, version, date) FROM stdin;
@@ -550,7 +550,7 @@ COPY works_on (ad_id, version, date) FROM stdin;
 
 
 --
--- Name: analyst_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: analyst_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY analyst
@@ -558,7 +558,7 @@ ALTER TABLE ONLY analyst
 
 
 --
--- Name: app_designer_id_key; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: app_designer_id_key; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY app_designer
@@ -566,7 +566,7 @@ ALTER TABLE ONLY app_designer
 
 
 --
--- Name: app_designer_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: app_designer_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY app_designer
@@ -574,7 +574,7 @@ ALTER TABLE ONLY app_designer
 
 
 --
--- Name: app_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: app_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY app
@@ -582,7 +582,7 @@ ALTER TABLE ONLY app
 
 
 --
--- Name: customer_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: customer_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY customer
@@ -590,7 +590,7 @@ ALTER TABLE ONLY customer
 
 
 --
--- Name: delivery_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: delivery_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY delivery
@@ -598,7 +598,7 @@ ALTER TABLE ONLY delivery
 
 
 --
--- Name: driver_id_key; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: driver_id_key; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY driver
@@ -606,7 +606,7 @@ ALTER TABLE ONLY driver
 
 
 --
--- Name: driver_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: driver_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY driver
@@ -614,7 +614,7 @@ ALTER TABLE ONLY driver
 
 
 --
--- Name: employee_id_key; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: employee_id_key; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY employee
@@ -622,7 +622,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: employee_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: employee_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY employee
@@ -630,7 +630,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: food_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: food_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY food
@@ -638,7 +638,7 @@ ALTER TABLE ONLY food
 
 
 --
--- Name: menu_item_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: menu_item_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY menu_item
@@ -646,7 +646,7 @@ ALTER TABLE ONLY menu_item
 
 
 --
--- Name: ratings_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: ratings_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY rating
@@ -654,7 +654,7 @@ ALTER TABLE ONLY rating
 
 
 --
--- Name: restaurant_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: restaurant_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY restaurant
@@ -662,7 +662,7 @@ ALTER TABLE ONLY restaurant
 
 
 --
--- Name: software_engineer_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: software_engineer_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY software_engineer
@@ -670,7 +670,7 @@ ALTER TABLE ONLY software_engineer
 
 
 --
--- Name: supervisor_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: supervisor_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY supervisor
@@ -678,7 +678,7 @@ ALTER TABLE ONLY supervisor
 
 
 --
--- Name: transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY transaction
@@ -686,7 +686,7 @@ ALTER TABLE ONLY transaction
 
 
 --
--- Name: transaction_time_key; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: transaction_time_key; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY transaction
@@ -694,7 +694,7 @@ ALTER TABLE ONLY transaction
 
 
 --
--- Name: transport_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: transport_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY transport
@@ -702,7 +702,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: vehicle_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: vehicle_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY vehicle
@@ -710,7 +710,7 @@ ALTER TABLE ONLY vehicle
 
 
 --
--- Name: works_on_pkey; Type: CONSTRAINT; Schema: public; Owner: irsyadnabil; Tablespace: 
+-- Name: works_on_pkey; Type: CONSTRAINT; Schema: public; Owner: gujekadmin; Tablespace: 
 --
 
 ALTER TABLE ONLY works_on
@@ -718,7 +718,7 @@ ALTER TABLE ONLY works_on
 
 
 --
--- Name: analyst_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: irsyadnabil
+-- Name: analyst_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gujekadmin
 --
 
 ALTER TABLE ONLY analyst
@@ -726,7 +726,7 @@ ALTER TABLE ONLY analyst
 
 
 --
--- Name: app_designer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: irsyadnabil
+-- Name: app_designer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gujekadmin
 --
 
 ALTER TABLE ONLY app_designer
@@ -734,7 +734,7 @@ ALTER TABLE ONLY app_designer
 
 
 --
--- Name: driver_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: irsyadnabil
+-- Name: driver_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gujekadmin
 --
 
 ALTER TABLE ONLY driver
@@ -742,7 +742,7 @@ ALTER TABLE ONLY driver
 
 
 --
--- Name: menu_fkey; Type: FK CONSTRAINT; Schema: public; Owner: irsyadnabil
+-- Name: menu_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gujekadmin
 --
 
 ALTER TABLE ONLY food
@@ -750,7 +750,7 @@ ALTER TABLE ONLY food
 
 
 --
--- Name: menu_restaurant_fkey; Type: FK CONSTRAINT; Schema: public; Owner: irsyadnabil
+-- Name: menu_restaurant_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gujekadmin
 --
 
 ALTER TABLE ONLY menu_item
@@ -758,7 +758,7 @@ ALTER TABLE ONLY menu_item
 
 
 --
--- Name: ratings_c_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: irsyadnabil
+-- Name: ratings_c_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gujekadmin
 --
 
 ALTER TABLE ONLY rating
@@ -766,7 +766,7 @@ ALTER TABLE ONLY rating
 
 
 --
--- Name: software_engineer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: irsyadnabil
+-- Name: software_engineer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gujekadmin
 --
 
 ALTER TABLE ONLY software_engineer
@@ -774,7 +774,7 @@ ALTER TABLE ONLY software_engineer
 
 
 --
--- Name: transaction_cust_no_fkey; Type: FK CONSTRAINT; Schema: public; Owner: irsyadnabil
+-- Name: transaction_cust_no_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gujekadmin
 --
 
 ALTER TABLE ONLY transaction
@@ -782,7 +782,7 @@ ALTER TABLE ONLY transaction
 
 
 --
--- Name: transaction_d_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: irsyadnabil
+-- Name: transaction_d_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gujekadmin
 --
 
 ALTER TABLE ONLY transaction
@@ -790,12 +790,12 @@ ALTER TABLE ONLY transaction
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: irsyadnabil
+-- Name: public; Type: ACL; Schema: -; Owner: gujekadmin
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM irsyadnabil;
-GRANT ALL ON SCHEMA public TO irsyadnabil;
+REVOKE ALL ON SCHEMA public FROM gujekadmin;
+GRANT ALL ON SCHEMA public TO gujekadmin;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
